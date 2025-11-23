@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starbucks Menu - Student Project</title>
+    <!-- Link to the same style.css file! -->
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        /* Small style tweaks specific to the menu page, if needed */
+        .menu-page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .menu-category h2 {
+            color: var(--starbucks-green);
+            border-bottom: 2px solid var(--light-green);
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        .menu-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px dashed #eee;
+            padding: 15px 0;
+        }
+        .menu-item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 20px;
+            object-fit: cover;
+        }
+        .item-details {
+            flex-grow: 1;
+        }
+        .item-details h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.1em;
+            color: var(--dark-grey);
+        }
+        .item-details p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .item-action {
+            display: flex;
+            align-items: center;
+            /* Added padding for spacing */
+            padding-right: 10px; 
+        }
+        .item-price {
+            font-weight: bold;
+            color: var(--starbucks-green);
+            white-space: nowrap; /* Keep price from wrapping */
+        }
+
+        /* Responsive menu layout */
+        @media (max-width: 600px) {
+            .menu-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            .menu-item img {
+                margin: 0 0 10px 0;
+            }
+            .item-action {
+                margin-top: 10px;
+                padding-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <span class="starbucks-green">Starbucks</span> Clone
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li> 
+                <li><a href="menu.html" class="active">Menu</a></li>
+                <li><a href="#rewards-section">Rewards</a></li>
+                <li><a href="#">Gift Cards</a></li>
+                <!-- Checkout link added to main navigation -->
+                <li><a href="checkout.html">Checkout</a></li> 
+            </ul>
+        </nav>
+        <div class="nav-actions">
+            <button class="sign-in-btn">Sign in</button>
+            <button class="join-now-btn">Join now</button>
+        </div>
+    </header>
+
+    <!-- Main Menu Content -->
+    <main class="menu-page-container">
+        <h1>Our Complete Menu</h1>
+        <p>Your items are currently managed in a simple list using JavaScript's localStorage. Click 'Add to Cart' to simulate adding them to an order.</p>
+
+        <div class="menu-category">
+            <h2>Seasonal & Featured Drinks</h2>
+            <div class="menu-item">
+                <img src="images/seasonal1.jpg" alt="Pumpkin Spice Latte">
+                <div class="item-details">
+                    <h3>Pumpkin Spice Latte</h3>
+                    <p>Espresso, steamed milk, and pumpkin spice flavors, topped with whipped cream.</p>
+                </div>
+                <div class="item-action">
+                    <span class="item-price">$5.95</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('Pumpkin Spice Latte', 5.95)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="images/seasonal2.jpg" alt="Caramel Apple Spice">
+                <div class="item-details">
+                    <h3>Caramel Apple Spice</h3>
+                    <p>Steamed apple juice mixed with cinnamon syrup, topped with whipped cream and caramel drizzle.</p>
+                </div>
+                <div class="item-action">
+                    <span class="item-price">$4.75</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('Caramel Apple Spice', 4.75)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-category">
+            <h2>Classic Hot Coffee</h2>
+            <div class="menu-item">
+                <img src="images/hot1.jpg" alt="Pike Place Roast">
+                <div class="item-details">
+                    <h3>Pike Place Roast</h3>
+                    <p>A balanced cup with smooth body and flavors of cocoa and toasted nuts.</p>
+                </div>
+                <div class="item-action">
+                    <span class="item-price">$2.95</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('Pike Place Roast', 2.95)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="images/hot2.jpg" alt="Caffe Americano">
+                <div class="item-details">
+                    <h3>Caffè Americano</h3>
+                    <p>Espresso shots topped with hot water to create a light layer of crema.</p>
+                </div>
+                <div class="item-action">
+                    <span class="item-price">$3.25</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('Caffè Americano', 3.25)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-category">
+            <h2>Cold Brew & Iced Coffee</h2>
+            <div class="menu-item">
+                <img src="images/iced1.jpg" alt="Vanilla Sweet Cream Cold Brew">
+                <div class="item-details">
+                    <h3>Vanilla Sweet Cream Cold Brew</h3>
+                    <p>Slow-steeped coffee accented with vanilla and a splash of sweet cream.</p>
+                </div>
+                <div class="item-action">
+                    <span class="item-price">$4.95</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('Vanilla Sweet Cream Cold Brew', 4.95)">Add to Cart</button>
+                </div>
+            </div>
+            <div class="menu-item">
+                <img src="images/iced2.jpg" alt="Iced Shaken Espresso">
+                <div class="item-details">
+                    <h3>Iced Brown Sugar Shaken Espresso</h3>
+                    <p>Espresso, brown sugar, and cinnamon shaken together and topped with oatmilk.</p>
+                </div>
+                <div class="item-action">
+                    <span class="item-price">$5.45</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('Iced Brown Sugar Shaken Espresso', 5.45)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="menu-category">
+            <h2>Bakery Items</h2>
+            <div class="menu-item">
+                <img src="images/bakery1.jpg" alt="Butter Croissant">
+                <div class="item-details">
+                    <h3>Butter Croissant</h3>
+                    <p>A flaky, buttery French pastry.</p>
+                </div>
+                <div class="item-action">
+                    <span class="item-price">$3.50</span>
+                    <button class="add-to-cart-btn" onclick="addToCart('Butter Croissant', 3.50)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="checkout.html" class="cta-btn" style="padding: 15px 30px; text-decoration: none;">Proceed to Checkout (View Cart)</a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Starbucks Clone (Student Project). All rights reserved.</p>
+    </footer>
+
+    <!-- Use the same script.js which contains the cart logic -->
+    <script src="script.js"></script> 
+</body>
+</html>

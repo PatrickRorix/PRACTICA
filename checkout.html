@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Student Project</title>
+    <!-- Link to the same style.css file! -->
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        .checkout-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        .order-summary, .payment-form {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 6px;
+        }
+        .order-summary {
+            background-color: var(--light-green);
+        }
+        .payment-form {
+            border: 1px solid #ccc;
+        }
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dotted #999;
+        }
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        .order-total {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--dark-grey);
+            padding-top: 15px;
+            border-top: 2px solid var(--starbucks-green);
+            margin-top: 15px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="text"], 
+        .form-group input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .place-order-btn {
+            background-color: var(--starbucks-green);
+            color: var(--white);
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        .place-order-btn:hover {
+            background-color: var(--dark-grey);
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <span class="starbucks-green">Starbucks</span> Clone
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li> 
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="#">Rewards</a></li>
+                <li><a href="#">Gift Cards</a></li>
+                <!-- Checkout is active on this page -->
+                <li><a href="checkout.html" class="active">Checkout</a></li> 
+            </ul>
+        </nav>
+        <div class="nav-actions">
+            <button class="sign-in-btn">Sign in</button>
+            <button class="join-now-btn">Join now</button>
+        </div>
+    </header>
+
+    <main class="checkout-container">
+        <h1>Order Checkout</h1>
+
+        <div class="order-summary">
+            <h2>Your Order Summary</h2>
+            <!-- Items will be populated by JavaScript -->
+            <div id="cart-items-list">
+                <!-- Example hardcoded item for structure -->
+                <div class="order-item">
+                    <span>1x Pumpkin Spice Latte</span>
+                    <span>$5.95</span>
+                </div>
+                <div class="order-item">
+                    <span>2x Butter Croissant</span>
+                    <span>$7.00</span>
+                </div>
+            </div>
+            
+            <div class="order-total">
+                <span>Total:</span>
+                <span id="order-total-amount">$12.95</span>
+            </div>
+        </div>
+
+        <div class="payment-form">
+            <h2>Payment & Pickup Details</h2>
+            <form id="payment-details-form">
+                <div class="form-group">
+                    <label for="name">Name for Order</label>
+                    <input type="text" id="name" name="name" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="example@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="card">Card Number (Placeholder)</label>
+                    <input type="text" id="card" name="card" required placeholder="XXXX XXXX XXXX XXXX">
+                </div>
+                <div class="form-group">
+                    <label>Pickup Location</label>
+                    <p>We'll deliver it to the next available barista!</p>
+                </div>
+                
+                <button type="submit" class="place-order-btn">Place Order</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Starbucks Clone (Student Project). All rights reserved.</p>
+    </footer>
+
+    <!-- This page will rely on the updated script.js to load the cart -->
+    <script src="script.js"></script>
+</body>
+</html>

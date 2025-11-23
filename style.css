@@ -5,6 +5,7 @@
     --dark-grey: #1e3932;
     --text-color: #333;
     --white: #ffffff;
+    --cart-button-color: #f00; /* Red for emphasis */
 }
 
 /* Basic Reset and Font */
@@ -15,6 +16,8 @@ body {
     color: var(--text-color);
     background-color: var(--white);
     line-height: 1.6;
+    /* Added smooth scroll for in-page links */
+    scroll-behavior: smooth; 
 }
 
 /* --- Navigation Bar --- */
@@ -178,6 +181,24 @@ nav ul li a.active {
 .product-card h3 {
     color: var(--starbucks-green);
     margin-top: 0;
+}
+
+/* --- Menu Specific Styles (kept inline in menu.html for student simplicity, but duplicating key elements here) --- */
+
+.add-to-cart-btn {
+    background-color: var(--starbucks-green);
+    color: var(--white);
+    padding: 8px 15px;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 15px;
+}
+
+.add-to-cart-btn:hover {
+    background-color: var(--dark-grey);
 }
 
 /* --- Footer --- */

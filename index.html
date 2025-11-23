@@ -13,8 +13,11 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#" class="active">Home</a></li> 
-                <li><a href="#menu-section">Menu</a></li>
+                <!-- Home link stays on this page and is active -->
+                <li><a href="index.html" class="active">Home</a></li> 
+                <!-- Menu link now points to the new page -->
+                <li><a href="menu.html">Menu</a></li>
+                <!-- Other links still scroll on this page for now -->
                 <li><a href="#rewards-info">Rewards</a></li>
                 <li><a href="#">Gift Cards</a></li>
                 <li><a href="#">Find a Store</a></li>
@@ -26,16 +29,20 @@
         </div>
     </header>
 
+    <!-- Main Content Area -->
     <main>
+        <!-- Hero Section -->
         <section class="hero-section">
             <div class="hero-content">
                 <h1>Sip into Savings!</h1>
                 <p>Enjoy 50% off all holiday drinks this week only. Don't miss out on your seasonal favorites!</p>
                 <button id="cta-button" class="cta-btn">Order Now</button>
             </div>
+            <!-- Reminder: You need an 'images/promo.jpg' file for this to load! -->
             <img src="images/promo.jpg" alt="Promotional Seasonal Drink">
         </section>
 
+        <!-- Product Cards Section (Kept here as a "What's New" feature) -->
         <section class="product-cards-section" id="menu-section">
             <h2>What's New</h2>
             <div class="card-container">
@@ -58,6 +65,7 @@
         </section>
     </main>
 
+    <!-- Footer -->
     <footer id="rewards-info">
         <p>&copy; 2024 Starbucks Clone (Student Project). All rights reserved.</p>
     </footer>
