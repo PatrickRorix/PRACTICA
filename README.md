@@ -81,7 +81,6 @@ Open the Project: Right-click on index.html and choose "Open with Live Server" (
 
  Next Steps & Potential Upgrades
 
-If you wish to continue developing this project, here are a few ideas:
 
 Implement Persistence: Currently, user authentication is simulated. A major upgrade would be integrating a real backend (like Firebase or Supabase) to handle user accounts and persistent orders.
 
