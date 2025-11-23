@@ -13,19 +13,19 @@
         </div>
         <nav>
             <ul>
-                <!-- Home link stays on this page and is active -->
+                <li><img src="images/starbucks-logo.png" alt="Starbucks Logo" class="logo-img"></li>
                 <li><a href="index.html" class="active">Home</a></li> 
-                <!-- Menu link now points to the new page -->
                 <li><a href="menu.html">Menu</a></li>
-                <!-- Other links still scroll on this page for now -->
-                <li><a href="#rewards-info">Rewards</a></li>
-                <li><a href="#">Gift Cards</a></li>
-                <li><a href="#">Find a Store</a></li>
+                <!-- NEW LINKS -->
+                <li><a href="rewards.html">Rewards</a></li>
+                <li><a href="giftcards.html">Gift Cards</a></li>
+                <li><a href="findastore.html">Find a Store</a></li>
             </ul>
         </nav>
         <div class="nav-actions">
-            <button class="sign-in-btn">Sign in</button>
-            <button class="join-now-btn">Join now</button>
+            <!-- NEW BUTTON LINKS -->
+            <button class="sign-in-btn" onclick="window.location.href='signin.html'">Sign in</button>
+            <button class="join-now-btn" onclick="window.location.href='signin.html'">Join now</button>
         </div>
     </header>
 
@@ -38,12 +38,11 @@
                 <p>Enjoy 50% off all holiday drinks this week only. Don't miss out on your seasonal favorites!</p>
                 <button id="cta-button" class="cta-btn">Order Now</button>
             </div>
-            <!-- Reminder: You need an 'images/promo.jpg' file for this to load! -->
             <img src="images/promo.jpg" alt="Promotional Seasonal Drink">
         </section>
 
         <!-- Product Cards Section (Kept here as a "What's New" feature) -->
-        <section class="product-cards-section" id="menu-section">
+        <section class="product-cards-section">
             <h2>What's New</h2>
             <div class="card-container">
                 <div class="product-card">
@@ -66,7 +65,7 @@
     </main>
 
     <!-- Footer -->
-    <footer id="rewards-info">
+    <footer>
         <p>&copy; 2024 Starbucks Clone (Student Project). All rights reserved.</p>
     </footer>
 

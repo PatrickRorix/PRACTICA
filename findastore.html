@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find a Store</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .store-finder-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+        }
+        .store-list-sidebar {
+            width: 300px;
+            padding: 15px;
+            border-right: 1px solid #ddd;
+            height: 600px; /* Fixed height to match map */
+            overflow-y: auto;
+        }
+        .map-area {
+            flex-grow: 1;
+        }
+        /* Style the map placeholder */
+        #map-placeholder {
+            width: 100%;
+            height: 600px;
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            color: #666;
+            text-align: center;
+        }
+        .store-item {
+            padding: 10px 0;
+            border-bottom: 1px dotted #ccc;
+            cursor: pointer;
+        }
+        .store-item:hover {
+            background-color: #f7f7f7;
+        }
+        .store-item h4 {
+            color: var(--dark-grey);
+            margin: 0;
+        }
+
+        /* Mobile adjustment */
+        @media (max-width: 768px) {
+            .store-finder-container {
+                flex-direction: column;
+            }
+            .store-list-sidebar {
+                width: 100%;
+                border-right: none;
+                height: 300px;
+                border-bottom: 1px solid #ddd;
+            }
+            #map-placeholder {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <span class="starbucks-green">Starbucks</span> Clone
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li> 
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="rewards.html">Rewards</a></li>
+                <li><a href="giftcards.html">Gift Cards</a></li>
+                <li class="active"><a href="findastore.html">Find a Store</a></li>
+            </ul>
+        </nav>
+        <div class="nav-actions">
+            <button class="sign-in-btn" onclick="window.location.href='signin.html'">Sign in</button>
+            <button class="join-now-btn" onclick="window.location.href='signin.html'">Join now</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="store-finder-container">
+            <div class="store-list-sidebar">
+                <h2>Local Stores</h2>
+                <!-- Search box placeholder -->
+                <input type="text" placeholder="Enter zip code or city" style="width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;">
+                
+                <div class="store-item" onclick="alert('Showing details for Downtown Store')">
+                    <h4>Downtown Coffee Hub</h4>
+                    <p>123 Main St, Anytown, CA 90001</p>
+                </div>
+                <div class="store-item" onclick="alert('Showing details for Mall Kiosk')">
+                    <h4>Regional Mall Kiosk</h4>
+                    <p>456 Shopping Center Dr, Anytown, CA 90002</p>
+                </div>
+                <div class="store-item" onclick="alert('Showing details for Northside Drive-Thru')">
+                    <h4>Northside Drive-Thru</h4>
+                    <p>789 Highway Blvd, Anytown, CA 90003</p>
+                </div>
+                <!-- Add more store items here -->
+            </div>
+            
+            <div class="map-area">
+                <h2>Map View</h2>
+                <div id="map-placeholder">
+                    [Map Placeholder]<br>
+                    (Requires Google Maps API Key to be functional)
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Starbucks Clone (Student Project). All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

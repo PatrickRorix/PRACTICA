@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In or Join</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            display: flex;
+            gap: 40px;
+        }
+        .auth-form {
+            flex: 1;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .sign-in-form {
+            background-color: var(--light-green);
+        }
+        .join-form {
+            background-color: #f5f5f5;
+        }
+        .auth-form h2 {
+            color: var(--dark-grey);
+            border-bottom: 2px solid var(--starbucks-green);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .submit-btn {
+            background-color: var(--starbucks-green);
+            color: var(--white);
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+        }
+        .submit-btn:hover {
+            background-color: var(--dark-grey);
+        }
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            font-weight: bold;
+            color: #777;
+        }
+
+        @media (max-width: 768px) {
+            .auth-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <span class="starbucks-green">Starbucks</span> Clone
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li> 
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="rewards.html">Rewards</a></li>
+                <li><a href="giftcards.html">Gift Cards</a></li>
+                <li><a href="findastore.html">Find a Store</a></li>
+            </ul>
+        </nav>
+        <div class="nav-actions">
+            <!-- Both buttons lead here, so we only show one state -->
+            <button class="join-now-btn active">Account</button> 
+        </div>
+    </header>
+
+    <main class="auth-container">
+        
+        <!-- Sign In Form -->
+        <div class="auth-form sign-in-form">
+            <h2>Sign In</h2>
+            <p>For existing Rewards members.</p>
+            <form onsubmit="event.preventDefault(); alert('Simulating Sign In! You would now be logged in.'); window.location.href='index.html';">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" name="password" required>
+                </div>
+                <button type="submit" class="submit-btn">Sign In</button>
+            </form>
+            <p style="font-size: 0.9em; text-align: center; margin-top: 15px;"><a href="#" style="color: var(--dark-grey);">Forgot Password?</a></p>
+        </div>
+
+        <div class="divider">OR</div>
+
+        <!-- Join Now Form -->
+        <div class="auth-form join-form">
+            <h2>Join Now</h2>
+            <p>Start earning Stars and getting freebies!</p>
+            <form onsubmit="event.preventDefault(); alert('Simulating Account Creation! Welcome to Starbucks Clone Rewards!'); window.location.href='index.html';">
+                <div class="form-group">
+                    <label for="join-name">First Name</label>
+                    <input type="text" id="join-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="join-email">Email Address</label>
+                    <input type="email" id="join-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="join-password">Create Password</label>
+                    <input type="password" id="join-password" name="password" required>
+                </div>
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+            <p style="font-size: 0.9em; margin-top: 15px;">By joining, you agree to our terms.</p>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Starbucks Clone (Student Project). All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

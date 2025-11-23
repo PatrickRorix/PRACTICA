@@ -16,7 +16,6 @@ body {
     color: var(--text-color);
     background-color: var(--white);
     line-height: 1.6;
-    /* Added smooth scroll for in-page links */
     scroll-behavior: smooth; 
 }
 
@@ -48,6 +47,10 @@ nav ul {
     padding: 0;
 }
 
+nav ul li {
+    position: relative; /* Needed for cart counter positioning */
+}
+
 nav ul li a {
     text-decoration: none;
     color: var(--text-color);
@@ -59,6 +62,24 @@ nav ul li a {
 nav ul li a:hover,
 nav ul li a.active {
     color: var(--starbucks-green);
+}
+
+/* --- NEW: Cart Counter Badge --- */
+.cart-counter {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #cc0000; /* Red */
+    color: white;
+    font-size: 0.7em;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+    line-height: 1;
+    min-width: 15px;
+    text-align: center;
+    transform: translate(50%, -50%);
+    display: none; /* Hide by default, shown by JS when count > 0 */
 }
 
 .nav-actions button {
@@ -96,7 +117,6 @@ nav ul li a.active {
     padding: 40px 5%;
     margin-top: 20px;
     text-align: center;
-    /* Uses flex-direction to stack content nicely on smaller screens */
     flex-direction: row; 
     gap: 30px;
 }
@@ -154,27 +174,28 @@ nav ul li a.active {
     display: flex;
     justify-content: space-around;
     gap: 20px;
-    flex-wrap: wrap; /* Allows cards to wrap on smaller screens */
+    flex-wrap: wrap; 
 }
 
 .product-card {
-    flex-basis: 30%; /* Take up about 30% of the container width */
+    flex-basis: 30%; 
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
     text-align: center;
-    transition: box-shadow 0.3s;
+    transition: box-shadow 0.3s, transform 0.3s; /* Added transform for hover */
 }
 
 .product-card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px); /* Added lift on hover */
 }
 
 .product-card img {
-    width: 100%; /* Make image fill the card width */
+    width: 100%; 
     max-width: 150px;
     height: auto;
-    border-radius: 50%; /* Circular images */
+    border-radius: 50%; 
     margin-bottom: 15px;
 }
 
@@ -183,8 +204,7 @@ nav ul li a.active {
     margin-top: 0;
 }
 
-/* --- Menu Specific Styles (kept inline in menu.html for student simplicity, but duplicating key elements here) --- */
-
+/* --- Menu Specific Styles --- */
 .add-to-cart-btn {
     background-color: var(--starbucks-green);
     color: var(--white);
@@ -200,6 +220,100 @@ nav ul li a.active {
 .add-to-cart-btn:hover {
     background-color: var(--dark-grey);
 }
+
+/* --- Checkout Specific Styles (Updated) --- */
+.order-item-detail {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 50px; /* Item Name | Price | Quantity Controls | Remove Button */
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dotted #ccc;
+}
+.order-item-detail span {
+    padding-right: 15px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.quantity-controls button, .remove-btn {
+    background-color: var(--starbucks-green);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 8px;
+    cursor: pointer;
+    font-weight: bold;
+    line-height: 1;
+    transition: background-color 0.2s;
+}
+
+.quantity-controls button:hover {
+    background-color: #00563b;
+}
+
+.remove-btn {
+    background-color: #cc0000;
+    font-size: 0.9em;
+    padding: 5px 10px;
+}
+.remove-btn:hover {
+    background-color: #a00;
+}
+
+/* --- NEW: Custom Modal for Confirmation/Alerts --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.modal-content {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    transform: scale(0.9);
+    transition: transform 0.3s ease-in-out;
+}
+
+.modal-content.success {
+    border-top: 5px solid var(--starbucks-green);
+}
+.modal-content.error {
+    border-top: 5px solid #cc0000;
+}
+
+.modal-content h3 {
+    color: var(--dark-grey);
+    margin-top: 0;
+}
+
+/* Class added by JS to show the modal */
+.modal-overlay.visible {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-overlay.visible .modal-content {
+    transform: scale(1);
+}
+
 
 /* --- Footer --- */
 footer {
@@ -241,7 +355,20 @@ footer {
     }
 
     .product-card {
-        flex-basis: 90%; /* Stack cards vertically */
+        flex-basis: 90%; 
         max-width: 300px;
+    }
+    
+    /* Responsive checkout layout */
+    .order-item-detail {
+        grid-template-columns: 1.5fr 1fr 1fr;
+        font-size: 0.9em;
+    }
+    .order-item-detail .remove-btn {
+        grid-column: 3 / 4;
+        justify-self: end;
+    }
+    .order-item-detail span:nth-child(2) { /* Price column */
+        display: none; /* Hide price on mobile for simplicity */
     }
 }

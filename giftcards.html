@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starbucks Gift Cards</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .giftcard-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .card-gallery {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .card-option {
+            width: 200px;
+            margin: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .card-option img {
+            width: 100%;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .buy-btn {
+            background-color: var(--starbucks-green);
+            color: var(--white);
+            padding: 8px 15px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .reload-section {
+            background-color: var(--light-green);
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <span class="starbucks-green">Starbucks</span> Clone
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li> 
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="rewards.html">Rewards</a></li>
+                <li class="active"><a href="giftcards.html">Gift Cards</a></li>
+                <li><a href="findastore.html">Find a Store</a></li>
+            </ul>
+        </nav>
+        <div class="nav-actions">
+            <button class="sign-in-btn" onclick="window.location.href='signin.html'">Sign in</button>
+            <button class="join-now-btn" onclick="window.location.href='signin.html'">Join now</button>
+        </div>
+    </header>
+
+    <main class="giftcard-container">
+        <h1>Starbucks Clone Gift Cards</h1>
+        <p>The perfect way to say thanks, happy birthday, or just because!</p>
+
+        <div class="card-gallery">
+            <div class="card-option">
+                <img src="https://placehold.co/200x120/00704A/ffffff?text=Holiday+Card" alt="Holiday Gift Card">
+                <h3>Holiday Cheer</h3>
+                <button class="buy-btn" onclick="alert('Simulating purchase for Holiday Card!')">Buy Now</button>
+            </div>
+            <div class="card-option">
+                <img src="https://placehold.co/200x120/1e3932/ffffff?text=Classic+Card" alt="Classic Gift Card">
+                <h3>Classic Design</h3>
+                <button class="buy-btn" onclick="alert('Simulating purchase for Classic Card!')">Buy Now</button>
+            </div>
+            <div class="card-option">
+                <img src="https://placehold.co/200x120/d4e9e2/1e3932?text=Coffee+Lover" alt="Coffee Lover Gift Card">
+                <h3>Coffee Lover</h3>
+                <button class="buy-btn" onclick="alert('Simulating purchase for Coffee Lover Card!')">Buy Now</button>
+            </div>
+        </div>
+
+        <div class="reload-section">
+            <h2>Reload Your Card</h2>
+            <form onsubmit="event.preventDefault(); alert('Simulating card reload for $50!');">
+                <p>Enter card number and amount to reload:</p>
+                <input type="text" placeholder="Card Number (XXXX-XXXX-XXXX)" style="padding: 10px; width: 60%; margin-right: 10px; border-radius: 4px;">
+                <input type="number" value="50" min="5" style="padding: 10px; width: 15%; margin-right: 10px; border-radius: 4px;">
+                <button type="submit" class="buy-btn" style="background-color: var(--dark-grey);">Reload</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Starbucks Clone (Student Project). All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

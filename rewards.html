@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starbucks Rewards</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .rewards-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .rewards-header {
+            background-color: var(--dark-grey);
+            color: var(--white);
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .rewards-header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .tier {
+            background-color: var(--light-green);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--starbucks-green);
+        }
+        .tier h3 {
+            color: var(--starbucks-green);
+            margin-top: 0;
+        }
+        .tier ul {
+            list-style: none;
+            padding: 0;
+        }
+        .tier li {
+            padding: 5px 0;
+            border-bottom: 1px dotted #999;
+        }
+        .join-cta {
+            text-align: center;
+            margin-top: 40px;
+        }
+        /* Style for the button linking to sign in */
+        .join-cta button {
+            background-color: var(--starbucks-green);
+            color: var(--white);
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <span class="starbucks-green">Starbucks</span> Clone
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li> 
+                <li><a href="menu.html">Menu</a></li>
+                <li class="active"><a href="rewards.html">Rewards</a></li>
+                <li><a href="giftcards.html">Gift Cards</a></li>
+                <li><a href="findastore.html">Find a Store</a></li>
+            </ul>
+        </nav>
+        <div class="nav-actions">
+            <button class="sign-in-btn" onclick="window.location.href='signin.html'">Sign in</button>
+            <button class="join-now-btn" onclick="window.location.href='signin.html'">Join now</button>
+        </div>
+    </header>
+
+    <main class="rewards-container">
+        <div class="rewards-header">
+            <h1>Starbucks Clone Rewards</h1>
+            <p>Earn Stars, get free coffee, food, and more!</p>
+        </div>
+
+        <div class="tier">
+            <h3>Green Tier (0 - 250 Stars)</h3>
+            <ul>
+                <li>⭐ Free refills on brewed coffee and tea</li>
+                <li>⭐ Earn 1 Star per $1 spent</li>
+                <li>⭐ Personalized offers and coupons</li>
+            </ul>
+        </div>
+
+        <div class="tier">
+            <h3>Gold Tier (250+ Stars)</h3>
+            <ul>
+                <li>🏆 Free birthday reward</li>
+                <li>🏆 Earn 2 Stars per $1 spent</li>
+                <li>🏆 Monthly double-star days</li>
+                <li>🏆 Gold-level personalization and deals</li>
+            </ul>
+        </div>
+
+        <div class="join-cta">
+            <h2>Ready to Start Earning?</h2>
+            <p>It's quick, easy, and free to join the Star Gang!</p>
+            <button onclick="window.location.href='signin.html'">Join Rewards Today</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Starbucks Clone (Student Project). All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

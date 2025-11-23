@@ -1,68 +1,113 @@
-// --- Cart Management Functions (Uses localStorage to persist cart between pages) ---
-
-// Initialize the cart array from localStorage, or start with an empty array
+// --- Global Modal and Cart State ---
 let cart = JSON.parse(localStorage.getItem('starbucksCart')) || [];
 
 /**
  * Saves the current cart array back to localStorage.
  */
 function saveCart() {
+    // Filter out items with quantity 0
+    cart = cart.filter(item => item.quantity > 0);
     localStorage.setItem('starbucksCart', JSON.stringify(cart));
+    updateCartCounter();
 }
 
-/**
- * Adds an item to the cart and updates localStorage.
- * This function is called by the 'onclick' event on menu.html buttons.
- * @param {string} name - The name of the item.
- * @param {number} price - The price of the item.
- */
-function addToCart(name, price) {
+// --- Modal Functions (Replaces alert() ---
+const modalOverlay = document.createElement('div');
+modalOverlay.className = 'modal-overlay';
+modalOverlay.innerHTML = `
+    <div class="modal-content">
+        <h3 id="modal-title"></h3>
+        <p id="modal-message"></p>
+        <button onclick="hideModal()" class="cta-btn" style="width: 100px; padding: 8px; margin-top: 15px;">OK</button>
+    </div>
+`;
+document.body.appendChild(modalOverlay);
+
+function showModal(title, message, type = 'success') {
+    document.getElementById('modal-title').textContent = title;
+    document.getElementById('modal-message').textContent = message;
+    
+    const content = modalOverlay.querySelector('.modal-content');
+    content.className = `modal-content ${type}`; // Apply success/error styling
+
+    modalOverlay.classList.add('visible');
+    
+    // Hide modal automatically after 3 seconds for quick confirmations
+    if (type === 'success') {
+        setTimeout(hideModal, 3000);
+    }
+}
+
+function hideModal() {
+    modalOverlay.classList.remove('visible');
+}
+
+// --- Cart Counter Function ---
+function updateCartCounter() {
+    const counterElement = document.getElementById('cart-total-counter');
+    if (counterElement) {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        
+        if (totalItems > 0) {
+            counterElement.textContent = totalItems;
+            counterElement.style.display = 'block';
+        } else {
+            counterElement.style.display = 'none';
+        }
+    }
+}
+
+// --- Cart Modification Functions (Called from menu.html and checkout.html) ---
+
+window.addToCart = function(name, price) {
     const itemIndex = cart.findIndex(item => item.name === name);
 
     if (itemIndex > -1) {
-        // Item already exists, just increase quantity
         cart[itemIndex].quantity += 1;
     } else {
-        // New item, add to cart
         cart.push({ name: name, price: price, quantity: 1 });
     }
 
     saveCart();
-    
-    // Simple confirmation message (using the modal system since alert() is banned)
-    // NOTE: For a student project, using a simple console log and changing the button text (below) is often enough.
-    console.log(`Added ${name} to cart. Cart total items: ${cart.length}`);
+    showModal('Success!', `Added ${name} to your cart.`, 'success');
+};
 
-    // Change button text briefly to confirm
-    const button = event.target; // event is globally available in an onclick
-    const originalText = button.textContent;
+window.updateQuantity = function(name, change) {
+    const item = cart.find(item => item.name === name);
+    if (item) {
+        item.quantity += change;
+    }
+    saveCart();
+    renderCart(); // Re-render the checkout page to update totals
+};
+
+window.removeItem = function(name) {
+    const initialLength = cart.length;
+    cart = cart.filter(item => item.name !== name);
     
-    button.textContent = 'Added!';
-    button.style.backgroundColor = '#cc0000'; // Temporary color change
+    if (cart.length < initialLength) {
+        showModal('Removed!', `${name} has been removed from your cart.`, 'success');
+    }
     
-    setTimeout(() => {
-        button.textContent = originalText;
-        button.style.backgroundColor = ''; // Revert to CSS default
-    }, 800);
-}
+    saveCart();
+    renderCart(); // Re-render the checkout page
+};
 
 
-// --- Checkout Page Rendering Logic (Runs only on checkout.html) ---
+// --- Checkout Page Rendering Logic ---
 
 /**
- * Renders the cart items on the checkout page.
+ * Renders the cart items on the checkout page with interactive controls.
  */
 function renderCart() {
     const cartList = document.getElementById('cart-items-list');
     const totalAmountSpan = document.getElementById('order-total-amount');
 
-    if (!cartList || !totalAmountSpan) {
-        // We are not on the checkout page, so stop.
-        return;
-    }
+    // Only run if we are on the checkout page
+    if (!cartList || !totalAmountSpan) return; 
 
     if (cart.length === 0) {
-        cartList.innerHTML = '<div class="order-item"><span>Your cart is empty.</span></div>';
+        cartList.innerHTML = '<div class="order-item-detail" style="display: block;"><span>Your cart is empty.</span></div>';
         totalAmountSpan.textContent = '$0.00';
         return;
     }
@@ -75,10 +120,18 @@ function renderCart() {
         total += itemTotal;
         
         const itemDiv = document.createElement('div');
-        itemDiv.className = 'order-item';
+        itemDiv.className = 'order-item-detail';
         itemDiv.innerHTML = `
-            <span>${item.quantity}x ${item.name}</span>
-            <span>$${itemTotal.toFixed(2)}</span>
+            <span>${item.name}</span>
+            <span class="item-price">$${item.price.toFixed(2)}</span>
+            
+            <div class="quantity-controls">
+                <button onclick="updateQuantity('${item.name}', -1)" ${item.quantity <= 1 ? 'disabled' : ''}>-</button>
+                <span data-quantity>${item.quantity}</span>
+                <button onclick="updateQuantity('${item.name}', 1)">+</button>
+            </div>
+            
+            <button class="remove-btn" onclick="removeItem('${item.name}')">Remove</button>
         `;
         cartList.appendChild(itemDiv);
     });
@@ -86,22 +139,15 @@ function renderCart() {
     totalAmountSpan.textContent = `$${total.toFixed(2)}`;
 }
 
+
 // --- General Page Logic ---
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Run the cart rendering function if we are on the checkout page
-    renderCart();
+    // 1. Initial counter update for all pages
+    updateCartCounter();
 
-    // 2. Original CTA button logic (for index.html)
-    const ctaButton = document.getElementById('cta-button');
-    if (ctaButton) {
-        // If we are on index.html, attach the original click handler
-        ctaButton.addEventListener('click', () => {
-             // In a student project, use a simple redirection or console log
-             console.log("Order button clicked, normally leads to menu.html");
-             // Example: window.location.href = 'menu.html';
-        });
-    }
+    // 2. Run the cart rendering function if we are on the checkout page
+    renderCart();
 
     // 3. Handle the final order submission on checkout.html
     const paymentForm = document.getElementById('payment-details-form');
@@ -109,26 +155,65 @@ document.addEventListener('DOMContentLoaded', () => {
         paymentForm.addEventListener('submit', function(event) {
             event.preventDefault();
             
-            // Simple success simulation
+            // Check if cart is empty before submitting
+            if (cart.length === 0) {
+                 showModal('Error', 'Your cart is empty! Please add items before checking out.', 'error');
+                 return;
+            }
+
             const total = document.getElementById('order-total-amount').textContent;
             
-            // This message replaces the banned alert()
             const successMessage = `
-                Order successfully placed! 
                 Total Charged: ${total}. 
-                Your order is being prepared. 
-                Thank you for shopping at Starbucks Clone!
+                Your order is being prepared and will be ready for pickup soon.
             `;
             
-            console.log(successMessage);
+            showModal('Order Successfully Placed!', successMessage, 'success');
             
             // Clear the cart after successful order
             cart = [];
             saveCart();
-            renderCart(); // Re-render the empty cart
             
-            // Disable the form buttons and display a thank you
-            paymentForm.innerHTML = `<h2 style="color: var(--starbucks-green); text-align: center;">Order Complete!</h2><p style="text-align: center;">${successMessage}</p>`;
+            // Update the form area to show success message
+            const checkoutContainer = document.querySelector('.checkout-container');
+            checkoutContainer.innerHTML = `
+                <div style="text-align: center; padding: 50px;">
+                    <h1 style="color: var(--starbucks-green);">Thank You!</h1>
+                    <p>${successMessage}</p>
+                    <button class="cta-btn" onclick="window.location.href='index.html'">Return Home</button>
+                </div>
+            `;
+        });
+    }
+
+    // 4. Form Validation on Sign In / Join (basic check)
+    const signInForm = document.querySelector('.sign-in-form form');
+    const joinForm = document.querySelector('.join-form form');
+    
+    if (signInForm) {
+        signInForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Simple validation simulation
+            const email = document.getElementById('login-email').value;
+            if (email.includes('@')) {
+                showModal('Welcome Back!', 'Simulating successful sign in. Redirecting to home...', 'success');
+                setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+            } else {
+                showModal('Error', 'Please enter a valid email address.', 'error');
+            }
+        });
+    }
+
+    if (joinForm) {
+        joinForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const password = document.getElementById('join-password').value;
+            if (password.length < 6) {
+                showModal('Error', 'Password must be at least 6 characters long.', 'error');
+            } else {
+                showModal('Welcome to Rewards!', 'Simulating successful account creation. Redirecting to home...', 'success');
+                setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+            }
         });
     }
 

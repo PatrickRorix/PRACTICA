@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Student Project</title>
-    <!-- Link to the same style.css file! -->
     <link rel="stylesheet" href="style.css"> 
     <style>
         .checkout-container {
@@ -26,15 +25,16 @@
         .payment-form {
             border: 1px solid #ccc;
         }
-        .order-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px dotted #999;
+        /* Item Header (Labels for the grid layout) */
+        .order-item-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 50px; 
+            font-weight: bold;
+            padding: 10px 0;
+            border-bottom: 2px solid var(--starbucks-green);
+            margin-bottom: 10px;
         }
-        .order-item:last-child {
-            border-bottom: none;
-        }
+        
         .order-total {
             font-size: 1.5em;
             font-weight: bold;
@@ -42,6 +42,8 @@
             padding-top: 15px;
             border-top: 2px solid var(--starbucks-green);
             margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
         }
         .form-group {
             margin-bottom: 15px;
@@ -73,6 +75,16 @@
         .place-order-btn:hover {
             background-color: var(--dark-grey);
         }
+
+        @media (max-width: 768px) {
+            .order-item-header {
+                grid-template-columns: 1.5fr 1fr 1fr;
+                font-size: 0.9em;
+            }
+             .order-item-header span:nth-child(2) { /* Hide Price label on mobile */
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -84,15 +96,14 @@
             <ul>
                 <li><a href="index.html">Home</a></li> 
                 <li><a href="menu.html">Menu</a></li>
-                <li><a href="#">Rewards</a></li>
-                <li><a href="#">Gift Cards</a></li>
-                <!-- Checkout is active on this page -->
-                <li><a href="checkout.html" class="active">Checkout</a></li> 
+                <li><a href="rewards.html">Rewards</a></li>
+                <li><a href="giftcards.html">Gift Cards</a></li>
+                <li><a href="findastore.html">Find a Store</a></li>
             </ul>
         </nav>
         <div class="nav-actions">
-            <button class="sign-in-btn">Sign in</button>
-            <button class="join-now-btn">Join now</button>
+            <button class="sign-in-btn" onclick="window.location.href='signin.html'">Sign in</button>
+            <button class="join-now-btn" onclick="window.location.href='signin.html'">Join now</button>
         </div>
     </header>
 
@@ -100,23 +111,24 @@
         <h1>Order Checkout</h1>
 
         <div class="order-summary">
-            <h2>Your Order Summary</h2>
-            <!-- Items will be populated by JavaScript -->
+            <h2>Your Cart (Updated Live)</h2>
+            
+            <!-- Header for the grid layout -->
+            <div class="order-item-header">
+                <span>Item</span>
+                <span>Price</span>
+                <span>Quantity</span>
+                <span></span>
+            </div>
+            
+            <!-- Cart Items are rendered dynamically by script.js here -->
             <div id="cart-items-list">
-                <!-- Example hardcoded item for structure -->
-                <div class="order-item">
-                    <span>1x Pumpkin Spice Latte</span>
-                    <span>$5.95</span>
-                </div>
-                <div class="order-item">
-                    <span>2x Butter Croissant</span>
-                    <span>$7.00</span>
-                </div>
+                <!-- Items will appear here after renderCart() runs -->
             </div>
             
             <div class="order-total">
                 <span>Total:</span>
-                <span id="order-total-amount">$12.95</span>
+                <span id="order-total-amount">$0.00</span>
             </div>
         </div>
 
@@ -137,7 +149,7 @@
                 </div>
                 <div class="form-group">
                     <label>Pickup Location</label>
-                    <p>We'll deliver it to the next available barista!</p>
+                    <p>Your order will be sent to the barista at the nearest Starbucks Clone location.</p>
                 </div>
                 
                 <button type="submit" class="place-order-btn">Place Order</button>
@@ -149,7 +161,6 @@
         <p>&copy; 2024 Starbucks Clone (Student Project). All rights reserved.</p>
     </footer>
 
-    <!-- This page will rely on the updated script.js to load the cart -->
     <script src="script.js"></script>
 </body>
 </html>
