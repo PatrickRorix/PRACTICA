@@ -1,0 +1,226 @@
+/* Define Starbucks Green and some reusable variables */
+:root {
+    --starbucks-green: #00704A;
+    --light-green: #d4e9e2;
+    --dark-grey: #1e3932;
+    --text-color: #333;
+    --white: #ffffff;
+}
+
+/* Basic Reset and Font */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+    background-color: var(--white);
+    line-height: 1.6;
+}
+
+/* --- Navigation Bar --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5%;
+    background-color: var(--white);
+    border-bottom: 1px solid #eee;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--dark-grey);
+}
+
+.starbucks-green {
+    color: var(--starbucks-green);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 10px 15px;
+    display: block;
+    font-weight: 500;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: var(--starbucks-green);
+}
+
+.nav-actions button {
+    padding: 8px 15px;
+    margin-left: 10px;
+    border: 1px solid var(--text-color);
+    border-radius: 50px; /* Pill shape */
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sign-in-btn {
+    background-color: var(--white);
+    color: var(--text-color);
+}
+
+.join-now-btn {
+    background-color: var(--dark-grey);
+    color: var(--white);
+    border-color: var(--dark-grey);
+}
+
+.join-now-btn:hover {
+    background-color: var(--starbucks-green);
+    border-color: var(--starbucks-green);
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    background-color: var(--light-green);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 5%;
+    margin-top: 20px;
+    text-align: center;
+    /* Uses flex-direction to stack content nicely on smaller screens */
+    flex-direction: row; 
+    gap: 30px;
+}
+
+.hero-content {
+    max-width: 500px;
+    text-align: left;
+}
+
+.hero-section h1 {
+    font-size: 3em;
+    color: var(--dark-grey);
+    margin-bottom: 0.5em;
+}
+
+.hero-section p {
+    font-size: 1.2em;
+    margin-bottom: 1.5em;
+}
+
+.hero-section img {
+    max-width: 40%;
+    height: auto;
+    border-radius: 8px; /* Slightly rounded edges for the image */
+}
+
+.cta-btn {
+    background-color: var(--starbucks-green);
+    color: var(--white);
+    padding: 12px 25px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta-btn:hover {
+    background-color: #00563b; /* A darker green for hover */
+}
+
+/* --- Product Cards Section --- */
+.product-cards-section {
+    padding: 40px 5%;
+    text-align: center;
+}
+
+.product-cards-section h2 {
+    font-size: 2em;
+    margin-bottom: 30px;
+    color: var(--dark-grey);
+}
+
+.card-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap; /* Allows cards to wrap on smaller screens */
+}
+
+.product-card {
+    flex-basis: 30%; /* Take up about 30% of the container width */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    transition: box-shadow 0.3s;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    width: 100%; /* Make image fill the card width */
+    max-width: 150px;
+    height: auto;
+    border-radius: 50%; /* Circular images */
+    margin-bottom: 15px;
+}
+
+.product-card h3 {
+    color: var(--starbucks-green);
+    margin-top: 0;
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--dark-grey);
+    color: var(--white);
+    margin-top: 30px;
+    font-size: 0.9em;
+}
+
+/* --- Simple Mobile Responsiveness (Student Level) --- */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    nav ul {
+        margin: 10px 0;
+        justify-content: center;
+    }
+
+    .nav-actions {
+        margin-bottom: 10px;
+    }
+
+    .hero-section {
+        flex-direction: column;
+    }
+    
+    .hero-section img {
+        max-width: 80%;
+    }
+
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-card {
+        flex-basis: 90%; /* Stack cards vertically */
+        max-width: 300px;
+    }
+}
